@@ -31,10 +31,10 @@ module Spree
         end
         # TODO: Want this to be inline like:
         # can [:admin, :manage, :stock], Spree::Product, suppliers: { id: user.supplier_id }
-        can [:admin, :manage, :stock], Spree::Product do |product|
-          product.supplier_ids.include?(user.supplier_id)
-        end
-        can [:admin, :create, :index], Spree::Product
+        # can [:admin, :manage, :stock], Spree::Product do |product|
+        #   product.supplier_ids.include?(user.supplier_id)
+        # end
+        can [:admin, :create, :index, :edit, :update], Spree::Product
         # can [:admin, :manage], Spree::ProductProperty, product: { supplier_ids: user.supplier_id }
         can [:admin, :manage, :stock], Spree::ProductProperty do |property|
           property.product.supplier_ids.include?(user.supplier_id)
@@ -51,9 +51,10 @@ module Spree
         can [:admin, :update], Spree::Supplier, id: user.supplier_id
         # TODO: Want this to be inline like:
         # can [:admin, :manage], Spree::Variant, supplier_ids: user.supplier_id
-        can [:admin, :manage], Spree::Variant do |variant|
-          variant.supplier_ids.include?(user.supplier_id)
-        end
+        # can [:admin, :read], Spree::Variant do |variant|
+        #   variant.supplier_ids.include?(user.supplier_id)
+        # end
+        # can [:admin, :read], Spree::Variant
       end
 
       if SpreeMarketplace::Config[:allow_signup]

@@ -1,7 +1,6 @@
 class Spree::SuppliersController < Spree::StoreController
 
   before_filter :check_if_supplier, only: [:create, :new]
-  ssl_required
 
   def create
     authorize! :create, Spree::Supplier
@@ -30,6 +29,7 @@ class Spree::SuppliersController < Spree::StoreController
     @supplier.email = spree_current_user.email if spree_current_user
 
     if @supplier.save
+      spree_current_user.generate_spree_api_key!
       flash[:success] = Spree.t('supplier_registration.create.success')
       redirect_to spree.account_path
     else

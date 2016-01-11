@@ -7,8 +7,8 @@ Spree::Supplier.class_eval do
   validates :tax_id, length: { is: 9, allow_blank: true }
 
   before_create :assign_name
-  before_create :stripe_recipient_setup
-  before_save :stripe_recipient_update
+  # before_create :stripe_recipient_setup
+  # before_save :stripe_recipient_update
 
   private
 
